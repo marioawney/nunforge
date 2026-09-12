@@ -1,0 +1,26 @@
+.footer {
+  position: relative;
+  z-index: 2;
+  border-block-start: 1px solid var(--line);
+  background: var(--black);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 2.2rem;
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+}
+
+.credit {
+  transition: color 0.5s var(--ease);
+  direction: ltr;
+}
+
+.credit:hover {
+  color: var(--gold);
+}

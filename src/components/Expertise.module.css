@@ -1,0 +1,29 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-block-start: 3rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.62rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink-dim);
+  font-size: 0.95rem;
+  font-weight: 600;
+  direction: ltr;
+  cursor: default;
+  transition: border-color 0.5s var(--ease), color 0.5s var(--ease),
+    background-color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  background: var(--panel-2);
+  transform: translateY(-2px);
+}

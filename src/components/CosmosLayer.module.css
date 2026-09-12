@@ -1,0 +1,72 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  /* The scene is one continuous background; it never sits in a box, so it can
+     never show a clipped edge. */
+}
+
+/* Phone / no-WebGL stand-in for the orb: same composition in pure CSS. */
+.orb {
+  /* Centred by the grid, so GSAP owns `transform` outright — mixing it with a
+     CSS `translate` centring trick loses the offset. */
+  grid-area: 1 / 1;
+  width: min(118vh, 118vw);
+  aspect-ratio: 1;
+  margin-block-start: -14vh;
+  will-change: transform, opacity;
+}
+
+/* Only the WebGL path cross-fades; on the CSS path GSAP owns opacity and a
+   transition would smear every scrub. */
+.orb[data-base="true"] {
+  transition: opacity 0.9s var(--ease);
+}
+
+.orb[data-hidden="true"] {
+  opacity: 0;
+}
+
+.orb::before,
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.orb::before {
+  /* Stops are percentages of the gradient ray, so the lit band has to be
+     generous or it collapses to an invisible dot on a phone. */
+  background: radial-gradient(
+    circle at center,
+    rgba(246, 231, 184, 0.36) 0%,
+    rgba(232, 199, 102, 0.27) 9%,
+    rgba(232, 199, 102, 0.15) 20%,
+    rgba(201, 162, 39, 0.075) 34%,
+    rgba(201, 162, 39, 0.025) 50%,
+    transparent 72%
+  );
+}
+
+.orb::after {
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0 9%,
+    rgba(201, 162, 39, 0.16) 9%,
+    rgba(201, 162, 39, 0.16) 9.2%,
+    transparent 9.2% 18%
+  );
+  mask-image: radial-gradient(circle at center, transparent 5%, #000 16%, transparent 50%);
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    transparent 5%,
+    #000 16%,
+    transparent 50%
+  );
+  opacity: 0.8;
+}

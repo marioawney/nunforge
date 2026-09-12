@@ -1,0 +1,38 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(17, 19, 24, 0.6);
+  direction: ltr;
+}
+
+.option {
+  min-width: 38px;
+  padding: 0.3rem 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: color 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+
+.option:hover {
+  color: var(--ink);
+}
+
+.option[aria-pressed="true"] {
+  background: var(--gold);
+  color: #0a0a0a;
+}
+
+.large .option {
+  min-width: 54px;
+  padding: 0.5rem 0.9rem;
+  font-size: 1rem;
+}

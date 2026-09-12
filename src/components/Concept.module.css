@@ -1,0 +1,51 @@
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+}
+
+.copy p + p {
+  margin-block-start: 1.25rem;
+}
+
+.body {
+  font-size: clamp(1rem, 1.5vw, 1.09rem);
+  line-height: 2.05;
+  max-width: 54ch;
+}
+
+.quote {
+  margin-block-start: 2.6rem;
+  padding-inline-start: 1.4rem;
+  border-inline-start: 2px solid var(--gold);
+  font-size: clamp(1.35rem, 3.4vw, 2rem);
+  line-height: 1.6;
+  color: var(--gold-bright);
+}
+
+.stage {
+  /* Reserves the space the background orb drifts into — it draws nothing
+     itself, so there is no panel edge to see. */
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 520px;
+  justify-self: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    display: none;
+  }
+  .quote {
+    margin-block-start: 2rem;
+  }
+}

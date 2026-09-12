@@ -1,0 +1,174 @@
+.hero {
+  position: relative;
+  /* Just enough runway for the recede scrub — any longer and the tail of the
+     section reads as an empty screen. */
+  height: 135vh;
+}
+
+.hero[data-static="true"] {
+  height: auto;
+  min-height: 100svh;
+}
+
+.sticky {
+  position: sticky;
+  inset-block-start: 0;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero[data-static="true"] .sticky {
+  position: relative;
+  min-height: 100svh;
+  height: auto;
+  padding-block: calc(var(--header-h) + 3rem) 5rem;
+}
+
+/* Water: concentric ripple rings under everything. */
+.rings {
+  position: absolute;
+  /* Auto margins centre this without a transform, so it survives both
+     writing directions and GSAP taking over `transform`. */
+  inset: 0;
+  margin: auto auto 8% auto;
+  width: min(150vh, 150vw);
+  aspect-ratio: 1;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0 58px,
+    rgba(201, 162, 39, 0.075) 58px 59px
+  );
+  mask-image: radial-gradient(circle at center, #000 12%, transparent 66%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 12%, transparent 66%);
+  animation: ripple 14s var(--ease-soft) infinite;
+}
+
+@keyframes ripple {
+  0% {
+    scale: 0.94;
+    opacity: 0.18;
+  }
+  50% {
+    scale: 1.03;
+    opacity: 0.55;
+  }
+  100% {
+    scale: 0.94;
+    opacity: 0.18;
+  }
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 62% 34% at 50% 66%,
+    rgba(8, 9, 11, 0.88) 0%,
+    rgba(8, 9, 11, 0.62) 45%,
+    transparent 75%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: var(--shell);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-block-end: 1.4rem;
+  /* the disc sits directly behind this line — keep it readable */
+  text-shadow: 0 0 14px rgba(8, 9, 11, 0.95), 0 0 4px rgba(8, 9, 11, 0.9);
+}
+
+.wordmark {
+  direction: ltr;
+  font-size: clamp(3.4rem, 13vw, 9.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  background: linear-gradient(
+    175deg,
+    #f6e7b8 0%,
+    var(--gold-bright) 32%,
+    var(--gold) 62%,
+    var(--gold-dim) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 60px rgba(201, 162, 39, 0.28));
+}
+
+.tagline {
+  margin-block: 1.6rem 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.9vw, 1.22rem);
+  line-height: 1.95;
+  color: var(--ink-dim);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-block-start: 2.6rem;
+}
+
+.scrollHint {
+  position: absolute;
+  inset-block-end: 2.2rem;
+  inset-inline: 0;
+  margin-inline: auto;
+  width: max-content;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.scrollHint i {
+  display: block;
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.hero[data-static="true"] .scrollHint {
+  display: none;
+}
+
+/* The intro copy is painted by the server and never starts hidden — GSAP
+   animates *from* a dimmed state instead, so a slow first load can never show
+   an empty hero. */
+
+@media (max-width: 700px) {
+  .hero {
+    height: 115vh;
+  }
+  .tagline {
+    line-height: 1.85;
+  }
+}
